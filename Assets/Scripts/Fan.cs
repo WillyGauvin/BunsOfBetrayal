@@ -1,8 +1,6 @@
-using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 using System.Collections.Generic;
-
+using System;
 
 public class Fan : MonoBehaviour
 {
@@ -18,11 +16,16 @@ public class Fan : MonoBehaviour
 
     int fanScore = 0;
 
+    public static event Action OnChangedTeam;
     public int FanScore
     {
         get { return fanScore; }
         set
-        { 
+        {
+            if ((fanScore < 0 && value > -1) || (fanScore > 0 && value < 1))
+            {
+                OnChangedTeam?.Invoke();
+            }
             fanScore = Mathf.Clamp(value, -5, 5);
             UpdateFan();
         }
@@ -61,11 +64,11 @@ public class Fan : MonoBehaviour
     {
         if (FanScore < 0)
         {
-            FanSprite.sprite = HomeFan[Random.Range(0, HomeFan.Count)];
+            FanSprite.sprite = HomeFan[UnityEngine.Random.Range(0, HomeFan.Count)];
         }
         else
         {
-            FanSprite.sprite = AwayFan[Random.Range(0, AwayFan.Count)]; ;
+            FanSprite.sprite = AwayFan[UnityEngine.Random.Range(0, AwayFan.Count)];
         }
         mySeat.UpdateFanScore();
     }
@@ -75,7 +78,7 @@ public class Fan : MonoBehaviour
         if (hotdogPopup != null)
             return false;
 
-        hotdogPopup = Object.Instantiate(hotdogPopup_Prefab, hotdogPopupLocation.transform.position, Quaternion.identity);
+        hotdogPopup = UnityEngine.Object.Instantiate(hotdogPopup_Prefab, hotdogPopupLocation.transform.position, Quaternion.identity);
         hotdogPopup.GetComponent<HotDogPopup>().Initialize(this);
         return true;
     }

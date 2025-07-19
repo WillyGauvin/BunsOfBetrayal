@@ -23,6 +23,8 @@ public class GameManager : MonoBehaviour
     {
         DontDestroyOnLoad(gameObject);
 
+        FanList = new List<Fan>();
+
         PlayerInventory = new Dictionary<Topping, int>();
 
         PlayerInventory.Add(Topping.Ketchup, 10);
@@ -36,11 +38,39 @@ public class GameManager : MonoBehaviour
         MaxAmountOfItem.Add(Topping.Mustard, 10);
         MaxAmountOfItem.Add(Topping.Relish, 2);
         MaxAmountOfItem.Add(Topping.HotSauce, 4);
+
+        Player = FindFirstObjectByType<Controller>();
+
+        Seats = FindObjectsByType<Seat>(FindObjectsSortMode.None);
+
+        int filledSeats = Mathf.RoundToInt((Seats.Length) * filledSeatsPercentage);
+        int homeFans = Mathf.RoundToInt(filledSeats * homeFanPercentage);
+
+        List<int> seatIndices = Enumerable.Range(0, Seats.Length).ToList();
+
+        ListExtensions.Shuffle(seatIndices); // Randomize seat order
+
+        for (int i = 0; i < filledSeats; i++)
+        {
+            int seatIndex = seatIndices[i];
+
+            if (i < homeFans)
+                FanList.Add(Seats[seatIndex].AddFan(UnityEngine.Random.Range(-5, 0)));
+
+            else
+                FanList.Add(Seats[seatIndex].AddFan(UnityEngine.Random.Range(1, 6)));
+
+        }
+        foreach (Seat seat in Seats)
+        {
+            seat.UpdateFanScore();
+        }
     }
 
     public Controller Player;
 
     Seat[] Seats;
+    List<Fan> FanList;
 
     [Range(0f, 1f)] public float filledSeatsPercentage = 0.75f;
     [Range(0f, 1f)] public float homeFanPercentage = 0.6f;
@@ -61,33 +91,6 @@ public class GameManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        Player = FindFirstObjectByType<Controller>();
-
-        Seats = FindObjectsByType<Seat>(FindObjectsSortMode.None);
-
-        int filledSeats = Mathf.RoundToInt((Seats.Length) * filledSeatsPercentage);
-        int homeFans = Mathf.RoundToInt(filledSeats * homeFanPercentage);
-
-        List<int> seatIndices = Enumerable.Range(0, Seats.Length).ToList();
-
-        ListExtensions.Shuffle(seatIndices); // Randomize seat order
-
-        for (int i = 0; i < filledSeats; i++)
-        {
-            int seatIndex = seatIndices[i];
-
-            if (i < homeFans)
-                Seats[seatIndex].AddFan(UnityEngine.Random.Range(-5, 0));
-
-            else
-                Seats[seatIndex].AddFan(UnityEngine.Random.Range(1, 6));
-
-        }
-        foreach (Seat seat in Seats)
-        {
-            seat.UpdateFanScore();
-        }
-
         HotDogRequest();
     }
 
@@ -133,5 +136,18 @@ public class GameManager : MonoBehaviour
         }
 
         HotDogRequest();
+    }
+
+    public Tuple<int, int> GetTotalToHomeFans()
+    {
+        int numOfHomeFans = 0;
+        foreach(Fan fan in FanList)
+        {
+            if (fan.FanScore > 0)
+            {
+                numOfHomeFans++;
+            }
+        }
+        return Tuple.Create(FanList.Count, numOfHomeFans);
     }
 }

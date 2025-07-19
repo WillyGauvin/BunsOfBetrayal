@@ -106,9 +106,6 @@ MonoBehaviour:
   mySeat: {fileID: 0}
   FanSprite: {fileID: 8200443967790268028}
   HomeFan:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   - {fileID: 3135401321093558354, guid: c3f02b17eacf04947b55a62e49a1c720, type: 3}
   - {fileID: -5954715658216600933, guid: fc211296149345141911ed1480e7dae7, type: 3}
   - {fileID: 3165947304545806178, guid: 964203808d8f21a488b6e60eba595643, type: 3}
@@ -120,9 +117,6 @@ MonoBehaviour:
   - {fileID: 25964391231297778, guid: 7ed5b1881390d1e4993d20260cd83955, type: 3}
   - {fileID: 2652198791672493507, guid: c2506ea93911f3c4e82f1b63c5bd0284, type: 3}
   AwayFan:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   - {fileID: -4565915007882635555, guid: bf13df33a3f697b4c892c50f0e6a39c4, type: 3}
   - {fileID: 662344015628304648, guid: 969f19e0861c8fc47a46151ac16cd8d8, type: 3}
   - {fileID: 3063521191033817072, guid: a4c8c9615634d584885abd3e6b3a40cb, type: 3}

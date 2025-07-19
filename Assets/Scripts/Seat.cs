@@ -20,12 +20,14 @@ public class Seat : MonoBehaviour
         
     }
 
-    public void AddFan(int FanScore)
+    public Fan AddFan(int FanScore)
     {
         myFan = GameObject.Instantiate(FanPrefab, SeatLocation.transform.position, FanPrefab.transform.rotation);
         myFan.Initialize(FanScore, this);
 
         UpdateFanScore();
+
+        return myFan;
     }
 
     public void UpdateFanScore()
