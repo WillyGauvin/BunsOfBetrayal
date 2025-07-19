@@ -1,0 +1,166 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1198808123107429948
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5187238773738127577}
+  - component: {fileID: 8200443967790268028}
+  - component: {fileID: 7299857190630720648}
+  m_Layer: 0
+  m_Name: Fan
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5187238773738127577
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1198808123107429948}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: -0, z: 0.7071068, w: -0.7071068}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 7669546845138248697}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 270}
+--- !u!212 &8200443967790268028
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1198808123107429948}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 3
+  m_Sprite: {fileID: 3135401321093558354, guid: fed9d3a7ba04c304e83b4651c4e966ac, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 0.21, y: 0.31}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 0
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
+--- !u!114 &7299857190630720648
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1198808123107429948}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54f4ade41774b7d44a161ed5dab2ec86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hotdogPopup_Prefab: {fileID: 2861611448174116828, guid: 5f447392ab120ce4bb2db69d1012cf7b, type: 3}
+  hotdogPopupLocation: {fileID: 4726772445407104330}
+  mySeat: {fileID: 0}
+  FanSprite: {fileID: 8200443967790268028}
+  HomeFan:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 3135401321093558354, guid: c3f02b17eacf04947b55a62e49a1c720, type: 3}
+  - {fileID: -5954715658216600933, guid: fc211296149345141911ed1480e7dae7, type: 3}
+  - {fileID: 3165947304545806178, guid: 964203808d8f21a488b6e60eba595643, type: 3}
+  - {fileID: 3083455391807405956, guid: faf142d85672b19478e5912efb6849f8, type: 3}
+  - {fileID: 410856062857861199, guid: 675a82ada7d98fd4dbbff06eb61a4e7a, type: 3}
+  - {fileID: 298137760960975181, guid: 42785b3642abeb04cae385c4812ae9db, type: 3}
+  - {fileID: -1010737527048808846, guid: 31ea82361b9884f42a046163a039aba7, type: 3}
+  - {fileID: 740229419460633579, guid: f5cc74747a93f3541bde96412c87c55f, type: 3}
+  - {fileID: 25964391231297778, guid: 7ed5b1881390d1e4993d20260cd83955, type: 3}
+  - {fileID: 2652198791672493507, guid: c2506ea93911f3c4e82f1b63c5bd0284, type: 3}
+  AwayFan:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: -4565915007882635555, guid: bf13df33a3f697b4c892c50f0e6a39c4, type: 3}
+  - {fileID: 662344015628304648, guid: 969f19e0861c8fc47a46151ac16cd8d8, type: 3}
+  - {fileID: 3063521191033817072, guid: a4c8c9615634d584885abd3e6b3a40cb, type: 3}
+  - {fileID: -4547884515867661887, guid: 0bff93090f036d64e96192c94dd8b197, type: 3}
+  - {fileID: 3165672330678140623, guid: 46a3f4d2ed12d434da15b43d06ac12ce, type: 3}
+  - {fileID: 3397898766582288906, guid: ccc12598958104946901a9ed73ead2aa, type: 3}
+  - {fileID: 2956085883081357492, guid: 3b7778cc43f621340b4f639a72d3c0eb, type: 3}
+  - {fileID: -5775997260459165845, guid: 12ac2545758393e4597040f67691ae34, type: 3}
+  - {fileID: -5236006462024263167, guid: 6d3d5c58a15c7894badf2150a0d78a1f, type: 3}
+  - {fileID: -4539444310805661088, guid: ba628b205f34ca84eb45a4214cf2d386, type: 3}
+--- !u!1 &4726772445407104330
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7669546845138248697}
+  m_Layer: 0
+  m_Name: HotDogPopup
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7669546845138248697
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4726772445407104330}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0.7071068, w: -0.7071068}
+  m_LocalPosition: {x: -0.267, y: -0.176, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5187238773738127577}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
