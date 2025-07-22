@@ -21,23 +21,14 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(gameObject);
 
         FanList = new List<Fan>();
 
         PlayerInventory = new Dictionary<Topping, int>();
 
-        PlayerInventory.Add(Topping.Ketchup, 10);
-        PlayerInventory.Add(Topping.Mustard, 10);
-        PlayerInventory.Add(Topping.Relish, 2);
-        PlayerInventory.Add(Topping.HotSauce, 3);
-
-        MaxAmountOfItem = new Dictionary<Topping, int>();
-
-        MaxAmountOfItem.Add(Topping.Ketchup, 10);
-        MaxAmountOfItem.Add(Topping.Mustard, 10);
-        MaxAmountOfItem.Add(Topping.Relish, 2);
-        MaxAmountOfItem.Add(Topping.HotSauce, 4);
+        PlayerInventory.Add(Topping.Relish, 0);
+        PlayerInventory.Add(Topping.HotSauce, 1);
 
         Player = FindFirstObjectByType<Controller>();
 
@@ -55,10 +46,10 @@ public class GameManager : MonoBehaviour
             int seatIndex = seatIndices[i];
 
             if (i < homeFans)
-                FanList.Add(Seats[seatIndex].AddFan(UnityEngine.Random.Range(-5, 0)));
+                FanList.Add(Seats[seatIndex].AddFan(UnityEngine.Random.Range(1, 4)));
 
             else
-                FanList.Add(Seats[seatIndex].AddFan(UnityEngine.Random.Range(1, 6)));
+                FanList.Add(Seats[seatIndex].AddFan(UnityEngine.Random.Range(-3, 0)));
 
         }
         foreach (Seat seat in Seats)
@@ -84,20 +75,31 @@ public class GameManager : MonoBehaviour
     }
 
     public Dictionary<Topping, int> PlayerInventory;
-    public Dictionary<Topping, int> MaxAmountOfItem;
 
     public static event Action OnToppingChange;
+
+    public int KetchupsToServedForRelish = 3;
+    public int KetchupsServed = 0;
+
+    float TimePerRequest = 7.0f;
+    float TimePerRequestRemaining;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         HotDogRequest();
+        TimePerRequestRemaining = TimePerRequest;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        TimePerRequestRemaining -= Time.deltaTime;
+        if (TimePerRequestRemaining <= 0.0f)
+        {
+            HotDogRequest();
+            TimePerRequestRemaining = TimePerRequest;
+        }
     }
 
     void HotDogRequest()
@@ -112,13 +114,16 @@ public class GameManager : MonoBehaviour
 
     public void UseTopping(Topping toppingType, Fan affectedFan)
     {
-        PlayerInventory[toppingType] -= 1;
-        OnToppingChange?.Invoke();
-
         switch(toppingType)
         {
             case Topping.Ketchup:
                 affectedFan.FanScore += 1;
+                KetchupsServed += 1;
+                if (KetchupsServed >= KetchupsToServedForRelish)
+                {
+                    AwardTopping(Topping.Relish);
+                    KetchupsServed = 0;
+                }
                 break;
 
             case Topping.Mustard:
@@ -126,28 +131,43 @@ public class GameManager : MonoBehaviour
                 break;
 
             case Topping.Relish:
+                PlayerInventory[toppingType] -= 1;
                 affectedFan.FanScore *= -1;
                 break;
 
             case Topping.HotSauce:
+                PlayerInventory[toppingType] -= 1;
                 affectedFan.FanScore *= 2;
                 break;
                 
         }
+        OnToppingChange?.Invoke();
 
-        HotDogRequest();
+        if (UnityEngine.Random.Range(0, 101) < 50)
+        {
+            HotDogRequest();
+        }
     }
 
-    public Tuple<int, int> GetTotalToHomeFans()
+    public float GetHomeFanPercent()
     {
-        int numOfHomeFans = 0;
+        int HomeFanCheerLevel = 0;
+        int AwayFanCheerLevel = 0;
+        int totalCheerlevel = 0;
         foreach(Fan fan in FanList)
         {
-            if (fan.FanScore > 0)
-            {
-                numOfHomeFans++;
-            }
+            if (fan.FanScore > 0) HomeFanCheerLevel += fan.FanScore;
+            if (fan.FanScore < 0) AwayFanCheerLevel += fan.FanScore;
         }
-        return Tuple.Create(FanList.Count, numOfHomeFans);
+        totalCheerlevel = HomeFanCheerLevel + Mathf.Abs(AwayFanCheerLevel);
+
+        return (float)HomeFanCheerLevel / (float)totalCheerlevel;
+        
+    }
+
+    public void AwardTopping(Topping toppingToAward)
+    {
+        PlayerInventory[toppingToAward] += 1;
+        OnToppingChange?.Invoke();
     }
 }

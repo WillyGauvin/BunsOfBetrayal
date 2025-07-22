@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 988578174707187315}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.034973145, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -76,8 +76,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 8631836840331055725, guid: f6c6cd6ede336674498af52e33a29cbe, type: 3}
+  m_SortingOrder: 1
+  m_Sprite: {fileID: 1891068225921946925, guid: 39ea1193179f1ad40acf64248e28d2e1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -126,7 +126,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.64, y: 0.33}
+    oldSize: {x: 0.64, y: 0.34}
     newSize: {x: 0.64, y: 0.64}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -146,7 +146,7 @@ GameObject:
   - component: {fileID: 3039518851381944655}
   - component: {fileID: 4032205475705421148}
   m_Layer: 0
-  m_Name: Floor (1)
+  m_Name: FloorColour
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -211,7 +211,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -5912999625044456904, guid: ffbeb169723597348a8104d2c1b271d4, type: 3}
+  m_Sprite: {fileID: -5182680070018300004, guid: 8333fe6c49204034bbbc27ff549bef64, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -294,7 +294,7 @@ Transform:
   m_GameObject: {fileID: 2548107857193294592}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
-  m_LocalPosition: {x: 0, y: 0.09, z: 0}
+  m_LocalPosition: {x: 0, y: 0.125, z: 0}
   m_LocalScale: {x: 0.9, y: 0.9, z: 0.9}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -343,8 +343,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
-  m_Sprite: {fileID: 8552205107960201102, guid: b21b6aded2ecdef47a5553641975a28c, type: 3}
+  m_SortingOrder: 2
+  m_Sprite: {fileID: -9170915279662781415, guid: 56a9add0453a8094eb2b37fa72c16450, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -390,7 +390,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -0.1887207}
+  m_AnchoredPosition: {x: 0, y: -0.144}
   m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6820385699557019653
@@ -466,7 +466,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 1
+  m_text: -1
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -597,6 +597,10 @@ MonoBehaviour:
   myFan: {fileID: 0}
   SeatLocation: {fileID: 2548107857193294592}
   FanScoreText: {fileID: 8904624028905729640}
+  Floor: {fileID: 3039518851381944655}
+  DefaultFloor: {fileID: -5182680070018300004, guid: 8333fe6c49204034bbbc27ff549bef64, type: 3}
+  YellowFloor: {fileID: -6557365657030360788, guid: de864219f863af344ae7555c43b50be2, type: 3}
+  BlueFloor: {fileID: 274225462730694366, guid: f2837e603d2498f40845d35c06c80da7, type: 3}
 --- !u!222 &5490807280790534111
 CanvasRenderer:
   m_ObjectHideFlags: 0

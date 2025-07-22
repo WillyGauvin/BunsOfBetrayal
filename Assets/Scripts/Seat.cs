@@ -9,6 +9,13 @@ public class Seat : MonoBehaviour
     public GameObject SeatLocation;
 
     public TextMeshPro FanScoreText;
+
+    [SerializeField] SpriteRenderer Floor;
+
+    [SerializeField] Sprite DefaultFloor;
+    [SerializeField] Sprite YellowFloor;
+    [SerializeField] Sprite BlueFloor;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -35,17 +42,17 @@ public class Seat : MonoBehaviour
         if (myFan != null)
         {
             FanScoreText.text = $"<b>{myFan.FanScore}</b>";
-            if (myFan.FanScore < 0)
-                FanScoreText.color = Color.blue;
-            else
-                FanScoreText.color = Color.red;
+            FanScoreText.color = (myFan.FanScore > 0) ? Color.white : Color.white;
+            Floor.sprite = (myFan.FanScore > 0) ? BlueFloor : YellowFloor;
+            if (myFan.FanScore == 0) Floor.sprite = DefaultFloor;
         }
         else
         {
             FanScoreText.text = "";
+            Floor.sprite = DefaultFloor;
         }
 
-        FanScoreText.fontSize = Mathf.Abs(myFan.FanScore * 0.5f) + 0.5f;
+        //FanScoreText.fontSize = Mathf.Abs(myFan.FanScore * 0.5f) + 0.5f;
     }
 
     public bool TryHotDogEvent()

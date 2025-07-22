@@ -7,6 +7,16 @@ public class HotDogPopup : MonoBehaviour
     [SerializeField] GameObject ToppingsPopup;
     [SerializeField] Button HotDogButton;
 
+    float RequestTime = 30.0f;
+    float RequestTimeElapsed = 0.0f;
+
+    [SerializeField] Color EnabledColorRed;
+    [SerializeField] Color EnabledColorGreen;
+    [SerializeField] Color DisabledColorRed;
+    [SerializeField] Color DisabledColorGreen;
+    [SerializeField] Color HighLightedColorRed;
+    [SerializeField] Color HighLightedColorGreen;
+
     public Fan myFan;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -34,6 +44,24 @@ public class HotDogPopup : MonoBehaviour
         {
             HotDogButton.interactable = true;
         }
+
+        if (!ToppingsPopup.activeSelf)
+        {
+            RequestTimeElapsed += Time.deltaTime;
+            float t = RequestTimeElapsed / RequestTime;
+            ColorBlock cb = HotDogButton.colors;
+            cb.disabledColor = Color.Lerp(DisabledColorGreen, DisabledColorRed, t);
+            cb.normalColor = Color.Lerp(EnabledColorGreen, EnabledColorRed, t);
+            cb.highlightedColor = Color.Lerp(HighLightedColorGreen, HighLightedColorRed, t);
+            cb.selectedColor = Color.Lerp(HighLightedColorGreen, HighLightedColorRed, t);
+            HotDogButton.colors = cb;
+
+            if (RequestTimeElapsed >= RequestTime)
+            {
+                FailedRequest();
+                Destroy(gameObject);
+            }
+        }
     }
 
     public void OnHotDogClicked()
@@ -44,6 +72,11 @@ public class HotDogPopup : MonoBehaviour
     public void CompletedRequest()
     {
         Destroy(gameObject);
+    }
+
+    public void FailedRequest()
+    {
+        myFan.FailedHotDogEvent();
     }
 
 }

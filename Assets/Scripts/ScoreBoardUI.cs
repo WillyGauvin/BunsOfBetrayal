@@ -6,44 +6,46 @@ public class ScoreBoardUI : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI TimerText;
 
-    [SerializeField] Image[] HomeLights;
-    [SerializeField] Image[] AwayLights;
+    [SerializeField] TextMeshProUGUI[] Innings;
 
-    [SerializeField] Sprite OffSprite;
-    [SerializeField] Sprite HomeSprite;
-    [SerializeField] Sprite AwaySprite;
+    [SerializeField] Image HomeFill;
 
     private void OnEnable()
     {
-        Fan.OnChangedTeam += UpdateTeams;
+        Fan.OnScoreChange += UpdateScore;
+        RoundManager.OnInningChange += UpdateInning;
     }
+    private void OnDisable()
+    {
+        Fan.OnScoreChange -= UpdateScore;
+        RoundManager.OnInningChange -= UpdateInning;
+    }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        UpdateTeams();
+        UpdateScore();
+        UpdateInning();
     }
+
 
     // Update is called once per frame
     void Update()
     {
         float remaining = Mathf.Max(0, RoundManager.Instance.TimeRemaining);
-        TimerText.text = TimeSpan.FromSeconds(remaining).ToString(@"mm:ss");
+        TimerText.text = TimeSpan.FromSeconds(remaining).ToString(@"mm\:ss");
     }
-    void UpdateTeams()
+    void UpdateScore()
     {
-        Tuple<int, int> TotalToHomeFansCount = GameManager.Instance.GetTotalToHomeFans();
+        HomeFill.fillAmount = GameManager.Instance.GetHomeFanPercent();
+    }
 
-        int totalFans = TotalToHomeFansCount.Item1;
-        int homeFans = TotalToHomeFansCount.Item2;
-        int awayFans = totalFans - homeFans;
-
-        float homeScoreBoardLights = (int)(((float) homeFans / (float) totalFans) * 9);
-        int awayScoreBoardLights = (int)(((float)awayFans / (float)totalFans) * 9);
-
-        for (int i = 0; i < HomeLights.Length; i++)
+    public void UpdateInning()
+    {
+        foreach (TextMeshProUGUI text in Innings)
         {
-            HomeLights[i].sprite = (i < homeScoreBoardLights)? HomeSprite : OffSprite;
-            AwayLights[i].sprite = (i < awayScoreBoardLights) ? AwaySprite : OffSprite;
+            text.color = Color.white;
         }
+        Innings[RoundManager.Instance.CurrentInning - 1].color = Color.red;
     }
 }

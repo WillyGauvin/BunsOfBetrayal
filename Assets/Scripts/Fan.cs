@@ -13,21 +13,19 @@ public class Fan : MonoBehaviour
     public SpriteRenderer FanSprite;
     public List<Sprite> HomeFan;
     public List<Sprite> AwayFan;
+    public List<Sprite> NeutralFan;
 
     int fanScore = 0;
 
-    public static event Action OnChangedTeam;
+    public static event Action OnScoreChange;
     public int FanScore
     {
         get { return fanScore; }
         set
         {
-            if ((fanScore < 0 && value > -1) || (fanScore > 0 && value < 1))
-            {
-                OnChangedTeam?.Invoke();
-            }
             fanScore = Mathf.Clamp(value, -5, 5);
             UpdateFan();
+            OnScoreChange?.Invoke();
         }
     }
     Controller Player;
@@ -62,13 +60,17 @@ public class Fan : MonoBehaviour
 
     public void UpdateFan()
     {
-        if (FanScore < 0)
+        if (FanScore > 0)
         {
             FanSprite.sprite = HomeFan[UnityEngine.Random.Range(0, HomeFan.Count)];
         }
-        else
+        else if (FanScore < 0)
         {
             FanSprite.sprite = AwayFan[UnityEngine.Random.Range(0, AwayFan.Count)];
+        }
+        else if (FanScore == 0)
+        {
+            FanSprite.sprite = NeutralFan[UnityEngine.Random.Range(0, NeutralFan.Count)];
         }
         mySeat.UpdateFanScore();
     }
@@ -77,9 +79,19 @@ public class Fan : MonoBehaviour
     {
         if (hotdogPopup != null)
             return false;
+        else if (FanScore == -5 || FanScore == 5)
+            return false;
 
         hotdogPopup = UnityEngine.Object.Instantiate(hotdogPopup_Prefab, hotdogPopupLocation.transform.position, Quaternion.identity);
         hotdogPopup.GetComponent<HotDogPopup>().Initialize(this);
         return true;
+    }
+
+    public void FailedHotDogEvent()
+    {
+        if (FanScore < 0)
+        {
+            FanScore *= -1;
+        }
     }
 }

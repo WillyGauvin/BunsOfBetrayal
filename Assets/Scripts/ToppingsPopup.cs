@@ -36,28 +36,8 @@ public class ToppingsPopup : MonoBehaviour
 
     void UpdateToppings()
     {
-        Ketchup.interactable = GameManager.Instance.PlayerInventory[Topping.Ketchup] > 0;
-        Mustard.interactable = GameManager.Instance.PlayerInventory[Topping.Mustard] > 0;
         Relish.interactable = GameManager.Instance.PlayerInventory[Topping.Relish] > 0;
         HotSauce.interactable = GameManager.Instance.PlayerInventory[Topping.HotSauce] > 0;
-
-        if (GameManager.Instance.PlayerInventory[Topping.Relish] == -1)
-        {
-            Relish.gameObject.SetActive(false);
-        }
-        else
-        {
-            Relish.gameObject.SetActive(true);
-        }
-
-        if (GameManager.Instance.PlayerInventory[Topping.HotSauce] == -1)
-        {
-            HotSauce.gameObject.SetActive(false);
-        }
-        else
-        {
-            HotSauce.gameObject.SetActive(true);
-        }
     }
 
     public void OnKetchupClicked()

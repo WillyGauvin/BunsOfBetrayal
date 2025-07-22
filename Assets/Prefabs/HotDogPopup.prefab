@@ -48,6 +48,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ToppingsPopup: {fileID: 965363234737965257}
   HotDogButton: {fileID: 660288419314356178}
+  EnabledColorRed: {r: 1, g: 0.2971698, b: 0.2971698, a: 1}
+  EnabledColorGreen: {r: 0.40741768, g: 1, b: 0.2971698, a: 1}
+  DisabledColorRed: {r: 0.7169812, g: 0, b: 0, a: 0.78431374}
+  DisabledColorGreen: {r: 0.118084855, g: 0.754717, b: 0, a: 0.78431374}
+  HighLightedColorRed: {r: 1, g: 0, b: 0, a: 1}
+  HighLightedColorGreen: {r: 0.15686275, g: 1, b: 0, a: 1}
   myFan: {fileID: 0}
 --- !u!1 &3074289072296950498
 GameObject:
@@ -148,10 +154,10 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9058824, g: 0.5568628, b: 0.38823533, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.05490196, g: 1, b: 0, a: 0.2627451}
+    m_HighlightedColor: {r: 0.53333336, g: 0.25490198, b: 0.2901961, a: 1}
+    m_PressedColor: {r: 0, g: 0.35566974, b: 1, a: 1}
+    m_SelectedColor: {r: 0.97136927, g: 0, b: 1, a: 1}
+    m_DisabledColor: {r: 1, g: 0.3162943, b: 0, a: 0.23529412}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -242,7 +248,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 100
+  m_SortingOrder: 50
   m_TargetDisplay: 0
 --- !u!114 &7439035052118313650
 MonoBehaviour:
