@@ -22,7 +22,7 @@ public class HotDogPopup : MonoBehaviour
     void Start()
     {
         ToppingsPopup.SetActive(false);
-        HotDogButton.interactable = false;
+        HotDogButton.interactable = true;
     }
 
     public void Initialize(Fan fan)
@@ -33,17 +33,17 @@ public class HotDogPopup : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float yOffset = Mathf.Abs(myFan.gameObject.transform.position.y - GameManager.Instance.Player.transform.position.y);
-        float xOffset = Mathf.Abs(myFan.gameObject.transform.position.x - GameManager.Instance.Player.transform.position.x);
-        if (yOffset > 0.64f || xOffset > 0.64f * 4.5f)
-        {
-            ToppingsPopup.SetActive(false);
-            HotDogButton.interactable = false;
-        }
-        else
-        {
-            HotDogButton.interactable = true;
-        }
+        //float yOffset = Mathf.Abs(myFan.gameObject.transform.position.y - GameManager.Instance.Player.transform.position.y);
+        //float xOffset = Mathf.Abs(myFan.gameObject.transform.position.x - GameManager.Instance.Player.transform.position.x);
+        //if (yOffset > 0.64f || xOffset > 0.64f * 4.5f)
+        //{
+        //    ToppingsPopup.SetActive(false);
+        //    HotDogButton.interactable = false;
+        //}
+        //else
+        //{
+        //    HotDogButton.interactable = true;
+        //}
 
         if (!ToppingsPopup.activeSelf)
         {

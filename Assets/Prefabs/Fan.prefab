@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 5187238773738127577}
   - component: {fileID: 8200443967790268028}
   - component: {fileID: 7299857190630720648}
-  m_Layer: 0
+  - component: {fileID: 3496333151110283647}
+  m_Layer: 6
   m_Name: Fan
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -78,7 +79,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 3
-  m_Sprite: {fileID: 3135401321093558354, guid: fed9d3a7ba04c304e83b4651c4e966ac, type: 3}
+  m_Sprite: {fileID: -615700589625016886, guid: 84dbb99fefdb3c840a9282bb2cf97f6d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -86,7 +87,7 @@ SpriteRenderer:
   m_Size: {x: 0.21, y: 0.31}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &7299857190630720648
@@ -102,6 +103,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hotdogPopup_Prefab: {fileID: 2861611448174116828, guid: 5f447392ab120ce4bb2db69d1012cf7b, type: 3}
+  FloatingTextPrefab: {fileID: 4846949352740700302, guid: cbfa4407c127f3141896d130278f8cf2, type: 3}
   hotdogPopupLocation: {fileID: 4726772445407104330}
   mySeat: {fileID: 0}
   FanSprite: {fileID: 8200443967790268028}
@@ -123,6 +125,52 @@ MonoBehaviour:
   - {fileID: -2499868144594559924, guid: b0a5a77665c26b34d95cdfbc6fbdbdef, type: 3}
   - {fileID: -5700267774260962643, guid: 236e8981bae615941869f16c1ac809f7, type: 3}
   - {fileID: -1684903289934320733, guid: 8dc49ee0746eda3439dfdc827286ab98, type: 3}
+--- !u!61 &3496333151110283647
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1198808123107429948}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.21, y: 0.31}
+    newSize: {x: 0.21, y: 0.31}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 0.22, y: 0.31}
+  m_EdgeRadius: 0
 --- !u!1 &4726772445407104330
 GameObject:
   m_ObjectHideFlags: 0

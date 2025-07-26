@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -27,7 +28,7 @@ public class GameManager : MonoBehaviour
 
         PlayerInventory = new Dictionary<Topping, int>();
 
-        PlayerInventory.Add(Topping.Relish, 0);
+        PlayerInventory.Add(Topping.Relish, 1);
         PlayerInventory.Add(Topping.HotSauce, 1);
 
         Player = FindFirstObjectByType<Controller>();
@@ -76,19 +77,29 @@ public class GameManager : MonoBehaviour
 
     public Dictionary<Topping, int> PlayerInventory;
 
-    public static event Action OnToppingChange;
+    public delegate void OnToppingChangeEvent(Topping ToppingChanged, int amount);
+    public static event OnToppingChangeEvent OnToppingChange;
+
+
+    public delegate void OnShowScoreBoardEvent(String MessageToShow);
+    public static event OnShowScoreBoardEvent OnShowScoreBoardMessage;
+
+    public static event Action UpdateRelish;
 
     public int KetchupsToServedForRelish = 3;
     public int KetchupsServed = 0;
 
-    float TimePerRequest = 7.0f;
+    float TimePerRequest = 2.0f;
     float TimePerRequestRemaining;
+
+    [SerializeField] LayerMask TargetLayer;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         HotDogRequest();
         TimePerRequestRemaining = TimePerRequest;
+        StartCoroutine(GameEvents());
     }
 
     // Update is called once per frame
@@ -119,6 +130,7 @@ public class GameManager : MonoBehaviour
             case Topping.Ketchup:
                 affectedFan.FanScore += 1;
                 KetchupsServed += 1;
+                UpdateRelish?.Invoke();
                 if (KetchupsServed >= KetchupsToServedForRelish)
                 {
                     AwardTopping(Topping.Relish);
@@ -133,20 +145,33 @@ public class GameManager : MonoBehaviour
             case Topping.Relish:
                 PlayerInventory[toppingType] -= 1;
                 affectedFan.FanScore *= -1;
+                OnToppingChange?.Invoke(toppingType, -1);
+
                 break;
 
             case Topping.HotSauce:
                 PlayerInventory[toppingType] -= 1;
                 affectedFan.FanScore *= 2;
+                OnToppingChange?.Invoke(toppingType, -1);
+
+
+                Collider2D[] hits = Physics2D.OverlapCircleAll(affectedFan.transform.position, 1.0f, TargetLayer);
+
+                foreach (Collider2D hit in hits)
+                {
+                    if (hit.GetComponent<Fan>() != affectedFan)
+                    {
+                        hit.GetComponent<Fan>().FanScore -= 1;
+                    }
+                }
                 break;
                 
         }
-        OnToppingChange?.Invoke();
 
-        if (UnityEngine.Random.Range(0, 101) < 50)
-        {
-            HotDogRequest();
-        }
+        //if (UnityEngine.Random.Range(0, 101) < 80)
+        //{
+        //    HotDogRequest();
+        //}
     }
 
     public float GetHomeFanPercent()
@@ -168,6 +193,64 @@ public class GameManager : MonoBehaviour
     public void AwardTopping(Topping toppingToAward)
     {
         PlayerInventory[toppingToAward] += 1;
-        OnToppingChange?.Invoke();
+        OnToppingChange?.Invoke(toppingToAward, 1);
+    }
+
+
+
+    IEnumerator GameEvents()
+    {
+        yield return new WaitForSeconds(1.0f);
+        while(true)
+        {
+            yield return new WaitForSeconds(30.0f);
+            float TimeRemaining = RoundManager.Instance.TimeRemaining;
+            if (TimeRemaining <= 30.0f)
+            {
+                StartCoroutine(HotDogFrenzy());
+            }
+            else if (TimeRemaining <= 60.0f)
+            {
+                StartCoroutine(AwayTeamScore());
+            }
+            else if (TimeRemaining <= 90.0f)
+            {
+                StartCoroutine(HomeTeamHomeRun());
+            }
+        }
+    }
+    IEnumerator HomeTeamHomeRun()
+    {
+        OnShowScoreBoardMessage?.Invoke("BLUE HOME RUN");
+        foreach (Fan fan in FanList)
+        {
+            if (UnityEngine.Random.Range(0, 101) < 30)
+            {
+                fan.FanScore += 1;
+                yield return new WaitForSeconds(UnityEngine.Random.Range(0.01f, 0.05f));
+            }
+        }
+    }
+
+    IEnumerator AwayTeamScore()
+    {
+        OnShowScoreBoardMessage?.Invoke("GREEN RUN");
+        foreach (Fan fan in FanList)
+        {
+            if (UnityEngine.Random.Range(0, 101) < 20)
+            {
+                fan.FanScore += -1;
+                yield return new WaitForSeconds(UnityEngine.Random.Range(0.01f, 0.05f));
+            }
+        }
+    }
+    IEnumerator HotDogFrenzy()
+    {
+        OnShowScoreBoardMessage?.Invoke("HALF OFF DOGS");
+        for (int i = 0; i < 10; i++)
+        {
+            HotDogRequest();
+            yield return new WaitForSeconds(UnityEngine.Random.Range(0.5f, 1.0f));
+        }
     }
 }

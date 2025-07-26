@@ -155,6 +155,10 @@ MonoBehaviour:
   Mustard: {fileID: 4500283848677449817}
   Relish: {fileID: 3948891537075892406}
   HotSauce: {fileID: 7020501054913951641}
+  TargetLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  AffectAreaPrefab: {fileID: 4822919587445334166, guid: 9b120bf0cfe22f54bab70201e8a962d3, type: 3}
 --- !u!1 &1057133406005461937
 GameObject:
   m_ObjectHideFlags: 0
@@ -242,6 +246,7 @@ GameObject:
   - component: {fileID: 3966057497302396497}
   - component: {fileID: 5690369805821972524}
   - component: {fileID: 7020501054913951641}
+  - component: {fileID: 3699955687897564045}
   m_Layer: 0
   m_Name: Hot Sauce
   m_TagString: Untagged
@@ -350,7 +355,64 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5690369805821972524}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &3699955687897564045
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4648181035809449808}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 8029891189164916827}
+          m_TargetAssemblyTypeName: ToppingsPopup, Assembly-CSharp
+          m_MethodName: OnHotSauceHovered
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 8029891189164916827}
+          m_TargetAssemblyTypeName: ToppingsPopup, Assembly-CSharp
+          m_MethodName: OnHotSacueUnHovered
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &5118245916588222905
 GameObject:
   m_ObjectHideFlags: 0

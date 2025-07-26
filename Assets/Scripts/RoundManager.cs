@@ -30,6 +30,7 @@ public class RoundManager : MonoBehaviour
 
     public float TimeRemaining = 120.0f;
     public float InningTimeRemaining;
+
     int innings = 9;
 
     float timePerInning;
@@ -41,6 +42,7 @@ public class RoundManager : MonoBehaviour
     {
         GameoverMenu.SetActive(false);
         timePerInning = TimeRemaining / (float)innings;
+
         InningTimeRemaining = timePerInning;
     }
 
@@ -58,12 +60,8 @@ public class RoundManager : MonoBehaviour
         if (InningTimeRemaining <= 0.0f)
         {
             CurrentInning = Mathf.Min(CurrentInning + 1, 9);
-            if (CurrentInning % 2 == 0)
-            {
-                GameManager.Instance.AwardTopping(Topping.HotSauce);
-                OnInningChange?.Invoke();
-            }
 
+            OnInningChange?.Invoke();
             InningTimeRemaining = timePerInning;
         }
     }
